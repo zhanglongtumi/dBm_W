@@ -20,7 +20,7 @@ void MainWindow::on_pushButton_clicked()
     float input_value;
     float dbm;
     ///unit        为   W,mW,uW,nW
-    ///uinit_id    为   0,1,2,3
+    ///unit_id    为   0,1,2,3
     int unit_id = ui->comboBox->currentIndex(); //// 获得功率输入值的单位
     input_value = ui->lineEdit->text().toFloat(); /// 输入功率值
     dbm = 10 * log10(input_value/(pow(10, 3 * (unit_id - 1))));
