@@ -17,36 +17,21 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
-//    QString unit;
-    QString input_value;
-//    unit = ui->comboBox->currentText();
-    input_value = ui->lineEdit->text();
-//    qDebug() << input_value + unit;
-
+    float input_value;
     float dbm;
-//    if (unit == "W") {
-//        dbm = 10 * log10(input_value.toFloat()/(pow(10,-3)));
-//    }
-//    if (unit == "mW") {
-//        dbm = 10 * log10(input_value.toFloat()/(1));
-//    }
-//    if (unit == "uW") {
-//        dbm = 10 * log10(input_value.toFloat()/(pow(10,3)));
-//    }
-//    if (unit == "nW") {
-//        dbm = 10 * log10(input_value.toFloat()/(pow(10,6)));
-//    }
-
-    int unit_id = ui->comboBox->currentIndex();
-    dbm = 10 * log10(input_value.toFloat()/(pow(10,-3 + 3 * unit_id)));
+    ///unit        为   W,mW,uW,nW
+    ///uinit_id    为   0,1,2,3
+    int unit_id = ui->comboBox->currentIndex(); //// 获得功率输入值的单位
+    input_value = ui->lineEdit->text().toFloat(); /// 输入功率值
+    dbm = 10 * log10(input_value/(pow(10, 3 * (unit_id - 1))));
 
     ui->label->setText(QString::number(dbm, 'f', 2) + "dBm");
 }
 
 void MainWindow::on_pushButton_2_clicked()
 {
-    float input_value;
-    input_value = ui->lineEdit_2->text().toFloat();
-
-    ui->label_2->setText(QString::number(pow(10,(input_value/10)-3)) + " W");
+    float input_value, dBm;
+    input_value = ui->lineEdit_2->text().toFloat(); /// 获得dBm值
+    dBm = pow(10,(input_value/10) - 3);
+    ui->label_2->setText(QString::number(dBm) + " W");
 }
