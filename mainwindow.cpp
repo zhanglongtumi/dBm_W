@@ -32,6 +32,20 @@ void MainWindow::on_pushButton_2_clicked()
 {
     float input_value, dBm;
     input_value = ui->lineEdit_2->text().toFloat(); /// 获得dBm值
-    dBm = pow(10,(input_value/10) - 3);
-    ui->label_2->setText(QString::number(dBm) + " W");
+    dBm = pow(10, (input_value / 10) - 3);
+    QString unit;
+    if (dBm > 1) {
+        unit = "W";
+    } else if (dBm > 0.001) {
+        unit = "mW";
+        dBm *= 1000;
+    } else if (dBm > 0.000001) {
+        unit = "uW";
+        dBm *= 1000000;
+    } else if (dBm > 0.000000001) {
+        unit = "nW";
+        dBm *= 1000000000;
+    }
+
+    ui->label_2->setText(QString::number(dBm) + unit);
 }
