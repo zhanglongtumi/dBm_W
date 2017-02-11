@@ -17,25 +17,28 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
-    QString unit;
+//    QString unit;
     QString input_value;
-    unit = ui->comboBox->currentText();
+//    unit = ui->comboBox->currentText();
     input_value = ui->lineEdit->text();
-    qDebug() << input_value + unit;
+//    qDebug() << input_value + unit;
 
     float dbm;
-    if (unit == "W") {
-        dbm = 10 * log10(input_value.toFloat()/(pow(10,-3)));
-    }
-    if (unit == "mW") {
-        dbm = 10 * log10(input_value.toFloat()/(1));
-    }
-    if (unit == "uW") {
-        dbm = 10 * log10(input_value.toFloat()/(pow(10,3)));
-    }
-    if (unit == "nW") {
-        dbm = 10 * log10(input_value.toFloat()/(pow(10,6)));
-    }
+//    if (unit == "W") {
+//        dbm = 10 * log10(input_value.toFloat()/(pow(10,-3)));
+//    }
+//    if (unit == "mW") {
+//        dbm = 10 * log10(input_value.toFloat()/(1));
+//    }
+//    if (unit == "uW") {
+//        dbm = 10 * log10(input_value.toFloat()/(pow(10,3)));
+//    }
+//    if (unit == "nW") {
+//        dbm = 10 * log10(input_value.toFloat()/(pow(10,6)));
+//    }
+
+    int unit_id = ui->comboBox->currentIndex();
+    dbm = 10 * log10(input_value.toFloat()/(pow(10,-3 + 3 * unit_id)));
 
     ui->label->setText(QString::number(dbm, 'f', 2) + "dBm");
 }
@@ -45,5 +48,5 @@ void MainWindow::on_pushButton_2_clicked()
     float input_value;
     input_value = ui->lineEdit_2->text().toFloat();
 
-    ui->label_2->setText(QString::number(pow(10,(input_value/10)-3)) + "W");
+    ui->label_2->setText(QString::number(pow(10,(input_value/10)-3)) + " W");
 }
